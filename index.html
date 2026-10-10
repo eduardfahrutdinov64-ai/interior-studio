@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Название студии — дизайн интерьера</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-soft:#F7F5F1;
+    --ink:#1B1B1B;
+    --ink-soft:#4A4A46;
+    --muted:#8A8680;
+    --clay:#D8B29C;
+    --clay-deep:#C79579;
+    --sage:#BCC7AE;
+    --sage-deep:#9FAD8E;
+    --border:#E7E3DC;
+    --font-serif:'Cormorant Garamond', Georgia, serif;
+    --font-sans:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:var(--font-sans);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+    font-size:16px;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+  h1,h2,h3{ font-family:var(--font-serif); font-weight:600; line-height:1.15; letter-spacing:-0.01em; }
+  h2{ font-size:38px; }
+  h3{ font-size:22px; font-weight:500; }
+  p{ color:var(--ink-soft); }
+  .eyebrow{ font-size:14px; color:var(--muted); font-weight:500; margin-bottom:10px; }
+  .btn{
+    display:inline-block;
+    font-family:var(--font-sans);
+    font-weight:600;
+    font-size:15px;
+    padding:14px 28px;
+    border-radius:2px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:#fff;
+    cursor:pointer;
+  }
+  .btn:hover{ background:#000; }
+  .btn-clay{ background:var(--clay); border-color:var(--clay); color:var(--ink); }
+  .btn-clay:hover{ background:var(--clay-deep); border-color:var(--clay-deep); }
+  .btn-outline{ background:transparent; color:var(--ink); }
+  .btn-outline:hover{ background:var(--ink); color:#fff; }
+
+  /* image placeholders — freelancer заменяет на реальные фото */
+  .img-slot{
+    background:var(--bg-soft);
+    border:1px dashed var(--muted);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    padding:20px;
+    width:100%;
+    height:100%;
+  }
+  .photo{ width:100%; height:100%; object-fit:cover; display:block; background:var(--bg-soft); }
+  .ratio-hero{ aspect-ratio:16/9; min-height:520px; }
+  .ratio-portrait{ aspect-ratio:4/5; }
+  .ratio-square{ aspect-ratio:1/1; }
+  .ratio-wide{ aspect-ratio:16/10; }
+
+  /* utility bar */
+  .utility-bar{ background:var(--ink); color:#EDEAE4; font-size:13px; }
+  .utility-bar .wrap{ display:flex; justify-content:space-between; align-items:center; padding:10px 24px; flex-wrap:wrap; gap:6px; }
+  .utility-bar a{ opacity:.9; }
+
+  /* header */
+  header.site{ border-bottom:1px solid var(--border); background:#fff; position:sticky; top:0; z-index:20; }
+  .header-row{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; gap:24px; }
+  .logo{ font-family:var(--font-serif); font-size:24px; font-weight:600; letter-spacing:0.02em; white-space:nowrap; }
+  nav.main-nav{ display:flex; gap:28px; font-size:15px; font-weight:500; }
+  .header-actions{ display:flex; align-items:center; gap:18px; }
+  .menu-toggle{ display:none; background:none; border:none; font-size:26px; cursor:pointer; color:var(--ink); }
+
+  /* hero */
+  .hero{ position:relative; }
+  .hero-media{ position:relative; min-height:100vh; overflow:hidden; }
+  .hero-media > img, .hero-media > .img-slot{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(100deg, rgba(27,27,27,.62) 0%, rgba(27,27,27,.28) 55%, rgba(27,27,27,0) 78%);
+  }
+  .hero-inner{
+    position:relative;
+    min-height:100vh;
+    max-width:1180px; margin:0 auto; padding:0 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:40px;
+  }
+  .hero-content{ max-width:560px; color:#fff; }
+  .hero-content h1{ font-size:52px; color:#fff; margin-bottom:18px; }
+  .hero-content p{ color:#EDEAE4; font-size:17px; max-width:46ch; }
+  .hero-content .btn{ margin-top:26px; }
+
+  .lead-card{
+    position:relative;
+    width:360px;
+    flex-shrink:0;
+    background:#fff;
+    border:1px solid var(--border);
+    padding:28px;
+  }
+  .lead-card h3{ margin-bottom:16px; }
+  .lead-card input, .lead-card textarea{
+    width:100%;
+    font-family:var(--font-sans);
+    font-size:14px;
+    border:1px solid var(--border);
+    background:var(--bg-soft);
+    padding:12px 14px;
+    margin-bottom:12px;
+    border-radius:2px;
+  }
+  .lead-card textarea{ min-height:80px; resize:vertical; }
+  .lead-card .btn{ width:100%; text-align:center; border:none; }
+  .lead-card .fine{ font-size:12px; color:var(--muted); margin-top:10px; }
+
+  section{ padding:100px 0; }
+  .section-tight{ padding:70px 0; }
+  .bg-soft{ background:var(--bg-soft); }
+
+  /* about */
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .stats-row{ display:flex; gap:40px; margin-top:32px; }
+  .stat b{ font-family:var(--font-serif); font-size:32px; display:block; }
+  .stat span{ font-size:13px; color:var(--muted); }
+
+  /* services */
+  .services-list{ margin-top:36px; border-top:1px solid var(--border); }
+  .service-row{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:32px;
+    padding:32px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .service-row h3{ color:var(--ink); }
+  .service-row p{ max-width:60ch; }
+
+  /* process */
+  .process-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:32px; margin-top:40px; }
+  .process-step .num{ font-family:var(--font-serif); font-size:40px; color:var(--sage-deep); display:block; margin-bottom:12px; }
+  .process-step h3{ margin-bottom:8px; font-size:19px; }
+  .process-step p{ font-size:14px; }
+
+  /* portfolio */
+  .portfolio-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
+  .portfolio-grid{
+    margin-top:40px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:210px;
+    gap:44px 16px;
+  }
+  .portfolio-item{ position:relative; }
+  .portfolio-item .tag{
+    position:absolute; left:0; bottom:-26px; font-size:13px; color:var(--muted);
+  }
+  .p-span-2x2{ grid-column:span 2; grid-row:span 2; }
+  .p-span-2x1{ grid-column:span 2; grid-row:span 1; }
+
+  /* testimonial */
+  .quote-block{ max-width:760px; margin:0 auto; text-align:center; }
+  .quote-block blockquote{
+    font-family:var(--font-serif);
+    font-style:italic;
+    font-size:30px;
+    line-height:1.4;
+    color:var(--ink);
+  }
+  .quote-author{ display:flex; align-items:center; justify-content:center; gap:14px; margin-top:28px; }
+  .avatar-slot{ width:52px; height:52px; border-radius:50%; }
+  .quote-author .who{ text-align:left; font-size:14px; }
+  .quote-author .who b{ display:block; }
+
+  /* cta banner */
+  .cta-banner{ background:var(--ink); color:#fff; text-align:center; }
+  .cta-banner h2{ color:#fff; margin-bottom:20px; }
+  .cta-banner p{ color:#C9C6C0; max-width:50ch; margin:0 auto 30px; }
+
+  /* footer */
+  footer{ background:#111110; color:#C9C6C0; padding:70px 0 24px; font-size:14px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:50px; border-bottom:1px solid #2B2A28; }
+  footer h4{ color:#fff; font-family:var(--font-sans); font-size:14px; font-weight:600; margin-bottom:16px; }
+  footer .logo{ color:#fff; margin-bottom:14px; }
+  footer ul{ list-style:none; display:flex; flex-direction:column; gap:10px; }
+  .footer-bottom{ display:flex; justify-content:space-between; padding-top:22px; font-size:13px; flex-wrap:wrap; gap:8px; }
+
+  @media (max-width:860px){
+    .menu-toggle{ display:block; }
+    nav.main-nav{
+      display:none;
+      position:absolute; top:100%; left:0; right:0;
+      background:#fff; border-bottom:1px solid var(--border);
+      flex-direction:column; padding:20px 24px; gap:16px;
+    }
+    nav.main-nav.open{ display:flex; }
+    .header-actions .btn{ display:none; }
+    .hero-media{ min-height:auto; display:block; }
+    .hero-media > img, .hero-media > .img-slot{ position:static; width:100%; height:auto; min-height:280px; aspect-ratio:16/10; }
+    .hero-overlay{ display:none; }
+    .hero-inner{ min-height:auto; flex-direction:column; align-items:stretch; padding:24px 24px 40px; }
+    .hero-content{ color:var(--ink); max-width:100%; }
+    .hero-content h1{ color:var(--ink); font-size:36px; }
+    .hero-content p{ color:var(--ink-soft); }
+    .lead-card{ width:100%; margin-top:24px; }
+    .about-grid{ grid-template-columns:1fr; gap:36px; }
+    .service-row{ grid-template-columns:1fr; gap:10px; }
+    .process-grid{ grid-template-columns:1fr 1fr; }
+    .portfolio-grid{ grid-template-columns:1fr 1fr; grid-auto-rows:150px; row-gap:40px; }
+    .footer-grid{ grid-template-columns:1fr; gap:28px; }
+  }
+</style>
+</head>
+<body>
+
+<!--
+  ИНСТРУКЦИЯ ПО ФОТО (для верстальщика)
+  Каждое место под изображение оформлено как .img-slot — серый пунктирный блок с подписью.
+  Чтобы вставить фото: удалите div.img-slot целиком и на его место поставьте
+  <img src="ваш-файл.jpg" alt="описание"> — блок уже задаёт нужные пропорции через класс ratio-*.
+  Рекомендуемые форматы: JPG или WebP, без надписей и лишних логотипов на фото.
+-->
+
+<div class="utility-bar">
+  <div class="wrap">
+    <span>Телефон: +7 (___) ___-__-__</span>
+    <span>Город, улица, дом, офис</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="header-row">
+    <div class="logo">Название студии</div>
+    <nav class="main-nav" id="mainNav">
+      <a href="#about">О нас</a>
+      <a href="#services">Услуги</a>
+      <a href="#process">Как мы работаем</a>
+      <a href="#portfolio">Портфолио</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#lead-form" class="btn btn-clay">Оставить заявку</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" style="padding:0;">
+  <div class="hero-media">
+    <!-- ФОТО 1 (герой): интерьер проекта студии, широкий кадр, светлый и просторный -->
+    <img src="img/living-room.jpg" alt="Интерьер гостиной-кухни в тёплых серых тонах">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Дизайн интерьера, который отражает вас</h1>
+        <p>Разрабатываем концепцию, 3D-визуализацию и полное сопровождение ремонта — от идеи до последней детали.</p>
+        <a href="#portfolio" class="btn btn-outline" style="border-color:#fff; color:#fff;">Смотреть портфолио</a>
+      </div>
+      <div class="lead-card" id="lead-form">
+        <h3>Оставить заявку</h3>
+        <input type="text" placeholder="Ваше имя">
+        <input type="tel" placeholder="Телефон">
+        <textarea placeholder="Комментарий (не обязательно)"></textarea>
+        <button class="btn btn-clay">Отправить заявку</button>
+        <p class="fine">Нажимая кнопку, вы соглашаетесь с политикой обработки данных.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">О нас</div>
+      <h2>Пространства, в которых приятно жить и работать</h2>
+      <p>Мы — команда дизайнеров интерьера, которая уже несколько лет создаёт продуманные пространства для квартир, домов и коммерческих объектов. Работаем с проектом от концепции до сдачи ключей.</p>
+      <p style="margin-top:16px;">Каждый интерьер начинается с разговора о том, как вы живёте и что для вас важно — а не с готового шаблона.</p>
+      <div class="stats-row">
+        <div class="stat"><b>8 лет</b><span>на рынке</span></div>
+        <div class="stat"><b>120+</b><span>реализованных проектов</span></div>
+        <div class="stat"><b>15</b><span>наград и публикаций</span></div>
+      </div>
+    </div>
+    <!-- ФОТО 2: портрет — вертикальный кадр интерьера или команды за работой -->
+    <img src="img/bedroom-red.jpg" alt="Спальня с ковровыми панелями и красной подсветкой" class="photo ratio-portrait" loading="lazy">
+  </div>
+</section>
+
+<section id="services" class="bg-soft">
+  <div class="wrap">
+    <div class="eyebrow">Услуги</div>
+    <h2>Чем мы занимаемся</h2>
+    <div class="services-list">
+      <div class="service-row">
+        <h3>Дизайн жилых интерьеров</h3>
+        <p>Квартиры, дома и загородные резиденции — авторские проекты под ключ, с учётом планировки, света и характера хозяев.</p>
+      </div>
+      <div class="service-row">
+        <h3>Коммерческие пространства</h3>
+        <p>Офисы, шоурумы, кафе и рестораны — интерьеры, которые работают на бренд и удобны для сотрудников и гостей.</p>
+      </div>
+      <div class="service-row">
+        <h3>Авторский надзор</h3>
+        <p>Контролируем качество на каждом этапе ремонта, чтобы результат совпал с проектом до миллиметра.</p>
+      </div>
+      <div class="service-row">
+        <h3>Подбор мебели и декора</h3>
+        <p>Формируем комплектацию проекта под ваш бюджет — от мебели по индивидуальным чертежам до декора и текстиля.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="eyebrow">Как мы работаем</div>
+    <h2>Путь от идеи до готового пространства</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <span class="num">1</span>
+        <h3>Консультация</h3>
+        <p>Обсуждаем задачи, бюджет и сроки, выезжаем на объект для замеров.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">2</span>
+        <h3>Концепция</h3>
+        <p>Разрабатываем планировку, мудборд и общий стиль пространства.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">3</span>
+        <h3>3D-визуализация</h3>
+        <p>Показываем, как будет выглядеть интерьер, до начала ремонта.</p>
+      </div>
+      <div class="process-step">
+        <span class="num">4</span>
+        <h3>Реализация</h3>
+        <p>Сопровождаем ремонт, расстановку мебели и финальный декор.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="bg-soft">
+  <div class="wrap">
+    <div class="portfolio-head">
+      <div>
+        <div class="eyebrow">Портфолио</div>
+        <h2>Реализованные проекты</h2>
+      </div>
+      <p style="max-width:40ch;">Каждый проект — это разговор с заказчиком, переведённый на язык пространства.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item p-span-2x2">
+        <!-- ФОТО 3: крупный кадр проекта, альбомная или квадратная ориентация -->
+        <img src="img/bedroom-plan.jpg" alt="Спальня с рабочей зоной, вид сверху" class="photo" style="object-position:center;" loading="lazy">
+        <span class="tag">Спальня, 13,5 м²</span>
+      </div>
+      <div class="portfolio-item">
+        <!-- ФОТО 4 -->
+        <img src="img/shower-room.jpg" alt="Санузел с душевой в тёмном камне" class="photo" style="object-position:center 60%;" loading="lazy">
+        <span class="tag">Санузел</span>
+      </div>
+      <div class="portfolio-item">
+        <!-- ФОТО 5 -->
+        <img src="img/balcony.jpg" alt="Балкон с диваном и барной стойкой" class="photo" style="object-position:center;" loading="lazy">
+        <span class="tag">Балкон</span>
+      </div>
+      <div class="portfolio-item p-span-2x1">
+        <!-- ФОТО 6: горизонтальный кадр -->
+        <img src="img/bedroom-workspace.jpg" alt="Спальня с рабочим местом в монохроме" class="photo" style="object-position:center 45%;" loading="lazy">
+        <span class="tag">Рабочая зона</span>
+      </div>
+      <div class="portfolio-item p-span-2x1">
+        <!-- ФОТО 7 -->
+        <img src="img/wardrobe.jpg" alt="Открытая гардеробная с подсветкой" class="photo" style="object-position:center 62%;" loading="lazy">
+        <span class="tag">Гардеробная</span>
+      </div>
+      <div class="portfolio-item p-span-2x1">
+        <!-- ФОТО 8 -->
+        <img src="img/bathroom.jpg" alt="Ванная комната в графитовых тонах" class="photo" style="object-position:center 60%;" loading="lazy">
+        <span class="tag">Ванная</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap quote-block">
+    <blockquote>«Мы получили не просто ремонт, а пространство, которое подходит именно нам — команда услышала каждое пожелание».</blockquote>
+    <div class="quote-author">
+      <!-- ФОТО 9: круглый портрет клиента -->
+      <div class="img-slot avatar-slot" style="font-size:9px; padding:2px;">Фото 9<br>200×200</div>
+      <div class="who"><b>Имя Фамилия</b><span>Клиент, проект «Квартира на Черепанова»</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner section-tight">
+  <div class="wrap">
+    <h2>Готовы обсудить ваш интерьер?</h2>
+    <p>Оставьте заявку — свяжемся в течение дня и предложим удобное время для встречи или созвона.</p>
+    <a href="#lead-form" class="btn btn-clay">Оставить заявку</a>
+  </div>
+</section>
+
+<footer id="contacts">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">Название студии</div>
+        <p style="color:#9C9A94; max-width:36ch;">Студия дизайна интерьера — квартиры, дома и коммерческие пространства под ключ.</p>
+      </div>
+      <div>
+        <h4>Навигация</h4>
+        <ul>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#portfolio">Портфолио</a></li>
+          <li><a href="#lead-form">Оставить заявку</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul>
+          <li>+7 (___) ___-__-__</li>
+          <li>info@студия.ru</li>
+          <li>Город, улица, дом, офис</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Название студии. Все права защищены.</span>
+      <span>Сайт разработан [ваше имя / студия]</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function(){
+    document.getElementById('mainNav').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
